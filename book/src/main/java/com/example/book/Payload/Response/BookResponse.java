@@ -8,6 +8,5 @@ public record BookResponse(
     Date publicationDate,
     double price,
     String descreption
-
 ) {  
 }
