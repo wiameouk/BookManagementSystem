@@ -28,7 +28,7 @@ public class BookMapper {
             book.getPublicationDate(),
             book.getPrice(),
             book.getDescription(),
-            book.getCategory().toString()
+            book.getCategory().getId().toString()
         );
     }
     
