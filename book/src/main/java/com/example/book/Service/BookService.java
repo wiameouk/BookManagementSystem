@@ -29,8 +29,8 @@ public class BookService implements IBookService {
 
     @Override
     @Transactional
-    public void saveBook(BookRequest bookRequest, String categoryId) {
-        Category category = categoryRepository.findById(UUID.fromString(categoryId))
+    public void saveBook(BookRequest bookRequest) {
+        Category category = categoryRepository.findById(UUID.fromString(bookRequest.categoryId()))
             .orElseThrow(() -> new CategoryNotFoundException("Category not found"));
         Book book = bookMapper.toBook(bookRequest);
         book.setCategory(category);
@@ -54,33 +54,29 @@ public class BookService implements IBookService {
 
     @Override
     @Transactional
-    public void UpdateBook(BookRequest bookRequest, String bookId, String categoryId) {
-        Book book = bookRepository.findById(UUID.fromString(bookId)) 
-            .orElseThrow(()-> new BookNotFoundException("Book not existe"));
-            Category category = categoryRepository.findById(UUID.fromString(categoryId))
-                .orElseThrow(()-> new CategoryNotFoundException("category not found"));
-                book.setTitle(bookRequest.title());
-                book.setAuthor(bookRequest.author());
-                book.setPublicationDate(bookRequest.publicationDate());
-                book.setPrice(bookRequest.price());
-                book.setDescreption(bookRequest.descreption());
-                book.setCategory(category);
-                bookRepository.save(book);
-    }
-
-    @Override
-    @Transactional
     public void deleteBookById(String bookId) {
         if(bookRepository.existsById(UUID.fromString(bookId)))
         {
             bookRepository.deleteById(UUID.fromString(bookId));
         }else{
             throw new BookNotFoundException("cannot find Book " +bookId);
-
         }
     }
 
-
-
+    @Override
+    @Transactional
+    public void UpdateBook(BookRequest bookRequest, String bookId) {
+        Book book = bookRepository.findById(UUID.fromString(bookId)) 
+            .orElseThrow(()-> new BookNotFoundException("Book not existe"));
+            Category category = categoryRepository.findById(UUID.fromString(bookRequest.categoryId()))
+                .orElseThrow(()-> new CategoryNotFoundException("category not found"));
+                book.setTitle(bookRequest.title());
+                book.setAuthor(bookRequest.author());
+                book.setPublicationDate(bookRequest.publicationDate());
+                book.setPrice(bookRequest.price());
+                book.setDescription(bookRequest.description());
+                book.setCategory(category);
+                bookRepository.save(book);
+    }
     
 }

@@ -15,7 +15,6 @@ public record BookRequest(
     String author,
 
     @NonNull
-    @NotBlank
     Date publicationDate,
 
     @NonNull
@@ -23,7 +22,7 @@ public record BookRequest(
     
     @NonNull
     @NotBlank
-    String descreption,
+    String description,
     
     @NonNull
     @NotBlank

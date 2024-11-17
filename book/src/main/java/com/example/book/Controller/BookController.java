@@ -25,27 +25,27 @@ import lombok.RequiredArgsConstructor;
 public class BookController {
     private final BookService bookService;
 
-    @PostMapping("/{categoryId}")
-    public ResponseEntity<Void>save(@RequestBody BookRequest bookRequest, @PathVariable String categoryId) {
-        bookService.saveBook(bookRequest, categoryId);
+    @PostMapping
+    public ResponseEntity<Void>save(@RequestBody BookRequest bookRequest) {
+        bookService.saveBook(bookRequest);
         return new ResponseEntity<>(HttpStatus.CREATED);
     }
     @GetMapping
     public ResponseEntity<List<BookResponse>> getAllBooks() {
         return ResponseEntity.ok(bookService.getAllBook());
     }
-    @GetMapping("/{bookId}")
-    public ResponseEntity<BookResponse> getBookById(@PathVariable String bookId) {
+    @GetMapping("/{Id}")
+    public ResponseEntity<BookResponse> getBookById(@PathVariable ("Id")String bookId) {
         BookResponse bookResponse = bookService.getBookById(null, bookId);
         return new ResponseEntity<>(bookResponse, HttpStatus.OK);
     }
-    @PutMapping("/{bookId}/{categoryId}")
-    public ResponseEntity<Void> updateBook(@RequestBody BookRequest bookRequest,@PathVariable String categoryId,@PathVariable String bookId) {
-        bookService.UpdateBook(bookRequest, bookId, categoryId);
+    @PutMapping("/{Id}")
+    public ResponseEntity<Void> updateBook(@RequestBody BookRequest bookRequest,@PathVariable ("Id")String bookId) {
+        bookService.UpdateBook(bookRequest, bookId);
         return new ResponseEntity<>(HttpStatus.ACCEPTED);   
     }
-    @DeleteMapping("/{bookId}")
-    public ResponseEntity<Void> deleteBook(@PathVariable ("bookId")String bookId) {
+    @DeleteMapping("/{Id}")
+    public ResponseEntity<Void> deleteBook(@PathVariable ("Id")String bookId) {
         bookService.deleteBookById(bookId);
         return new ResponseEntity<>(HttpStatus.ACCEPTED);
     }

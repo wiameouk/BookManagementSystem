@@ -7,6 +7,7 @@ public record BookResponse(
     String author,
     Date publicationDate,
     double price,
-    String descreption
+    String descreption,
+    String categoryId
 ) {  
 }

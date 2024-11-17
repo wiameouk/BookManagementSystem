@@ -1,5 +1,6 @@
 package com.example.book.Entity;
 import java.sql.Date;
+import java.time.LocalDate;
 import java.util.UUID;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -40,7 +41,7 @@ public class Book {
     private double price;
 
     @Column(nullable = false)
-    private String descreption;
+    private String description;
     
     @ManyToOne
     @JoinColumn(name = "category_id")

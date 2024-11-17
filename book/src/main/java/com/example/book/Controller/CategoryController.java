@@ -38,13 +38,13 @@ public class CategoryController {
         CategoryResponse categoryResponse = categoryService.getCategoryById(null, categoryId);
         return new ResponseEntity<>(categoryResponse, HttpStatus.OK);
     }
-    @PutMapping("/{Id}")
+    @PutMapping("/{categoryId}")
     public ResponseEntity<Void> updateCategory(@RequestBody CategoryRequest categoryRequest,@PathVariable String categoryId) {
         categoryService.UpdateCategory(categoryRequest, categoryId);
         return new ResponseEntity<>(HttpStatus.ACCEPTED);   
     }
-    @DeleteMapping("/{Id}")
-    public ResponseEntity<Void>deleteCategory(@PathVariable("Id")String categoryId) {
+    @DeleteMapping("/{categoryId}")
+    public ResponseEntity<Void>deleteCategory(@PathVariable String categoryId) {
         categoryService.deleteCategoryById(categoryId);
         return new ResponseEntity<>(HttpStatus.ACCEPTED);
     }

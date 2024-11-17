@@ -15,7 +15,7 @@ public class BookMapper {
             .author(bookRequest.author())
             .publicationDate(bookRequest.publicationDate())
             .price(bookRequest.price())
-            .descreption(bookRequest.descreption())
+            .description(bookRequest.description())
             .build();
 
     }
@@ -27,7 +27,8 @@ public class BookMapper {
             book.getAuthor(),
             book.getPublicationDate(),
             book.getPrice(),
-            book.getDescreption()
+            book.getDescription(),
+            book.getCategory().toString()
         );
     }
     
